@@ -1,16 +1,16 @@
 const db = require("../data/config")
 
 function find() {
-    return db("instructions as i")
+    return db("ingredients as i")
     .join("recipes as r", "r.id", "i.recipes_id")
-    .select("i.id", "i.steps", "r.name a recipe" )
+    .select("r.recipes_id", "r.name as recipe", "i.recipes_id as ingredients")
 }
 
-function findById(){
-    return db("instructions as i")
+function findById(id){
+    return db("ingredients as i")
     .where("i.id", id)
     .join("recipes as r", "r.id", "i.recipes_id")
-    .first("i.id", "i.steps", "r.name as recipe")
+    .first("i.id", "i.name", "r.name as recipes_name")
 }
 
 module.exports = {
